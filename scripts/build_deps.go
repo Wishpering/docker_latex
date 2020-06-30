@@ -57,7 +57,14 @@ func main() {
 		_ , error := exec.Command("cp", file_name + ".sty", "/usr/share/texmf/tex/latex/" + file_name + "/").Output()
 		if error != nil {
 		   panic(error)
-     		}
+     		} else {
+		  _ , error := exec.Command("texhash").Output()
+		  if error != nil {
+		     panic(error)
+		  } else {
+		     fmt.Println("Updating tex hash ...")
+		  }
+		}
 		
 	    }
 	    
