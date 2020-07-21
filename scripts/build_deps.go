@@ -47,14 +47,14 @@ func main() {
 		   fmt.Println("Successfully builded", file_name + ".sty")
 		}
 
-		if _, err := os.Stat("/usr/share/texmf/tex/latex/" + file_name); os.IsNotExist(err) {
-		   err := os.MkdirAll("/usr/share/texmf/tex/latex/" + file_name, os.ModePerm)
+		if _, err := os.Stat("/usr/share/texmf-dist/tex/latex/" + file_name); os.IsNotExist(err) {
+		   err := os.MkdirAll("/usr/share/texmf-dist/tex/latex/" + file_name, os.ModePerm)
 		   if err != nil {
 		      panic(err)
 		   }
 	   	}
 
-		_ , error := exec.Command("cp", file_name + ".sty", "/usr/share/texmf/tex/latex/" + file_name + "/").Output()
+		_ , error := exec.Command("cp", file_name + ".sty", "/usr/share/texmf-dist/tex/latex/" + file_name + "/").Output()
 		if error != nil {
 		   panic(error)
      		} else {
