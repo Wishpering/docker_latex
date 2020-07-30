@@ -1,7 +1,7 @@
 # What is it?
 
 Docker image based on alpine:latest for building LaTeX docs in docker container.\
-Includes such packages as make, pygments, kvmap.
+Includes such packages as make, pygments.
 
 ## Installation
 
