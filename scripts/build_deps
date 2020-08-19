@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+PFLAGS="-no-shell-escape -interaction nonstopmode"
+TEX_DIR="/usr/share/texmf-dist/tex/latex/"
+
+for directory in $(find . -name "*.ins")
+do
+    cd $(dirname $directory)
+
+    # На всякий случай удаляем .sty файлы
+    rm -vrf *.sty 2>&1 >> /dev/null
+
+    # Билдим все .ins файлы
+    for file in $(find . -name "*.ins")
+    do
+        pdflatex $PFLAGS $file
+    done
+    
+    cd -
+done
+
+for sty_file in $(find . -name "*.sty")
+do
+    package_dir=$(dirname $sty_file)
+    
+    # Удаляем префикс чтобы получить название 
+    package_name=${package_dir#"./include_pkg/"}
+
+    echo "This - $sty_file, Target - $TEX_DIR$package_name"
+    
+    mkdir -p $TEX_DIR$package_name
+    cp $sty_file $TEX_DIR$package_name/$package_name".sty"
+done
+
+echo "Updating tex hash"
+texhash --quiet 2>&1 >> /dev/null
