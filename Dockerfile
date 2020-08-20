@@ -8,8 +8,10 @@ RUN apk add --no-cache make \
 		       texmf-dist-langcyrillic \
 		       py3-pygments
 
-WORKDIR /tex
-COPY ./scripts/build_deps .
-COPY include_pkg .
 
-RUN ./build_deps
+COPY include_pkg/ ./tex
+
+WORKDIR /tex
+RUN ./build_deps && rm -rfv /tex
+
+WORKDIR /

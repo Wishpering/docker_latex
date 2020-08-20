@@ -5,14 +5,18 @@ Includes such packages as make, pygments.
 
 ## Installation
 
-Make image by yourself
+Make image by yourself:
+
+Download and place unpacked needed packages from CTAN/etc into include_pkg directory
+
+Then run
 
 ```bash
 git clone https://github.com/Wishpering/docker_latex
 docker build .
 ```
 
-Or just run
+Or just use prebuild img with kvmap
 ```bash
 docker pull wishpering/latex:latest
 ```
