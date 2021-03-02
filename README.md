@@ -16,7 +16,7 @@ git clone https://github.com/Wishpering/docker_latex
 docker build .
 ```
 
-Or just use prebuild img with kvmap
+Or just use prebuild img with Pygments and kvmap
 ```bash
 docker pull wishpering/latex:latest
 ```
