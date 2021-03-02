@@ -8,10 +8,12 @@ RUN apk add --no-cache make \
 		       texmf-dist-langcyrillic \
 		       py3-pygments
 
-
 COPY include_pkg/ ./tex
 
 WORKDIR /tex
 RUN ./build_deps && rm -rfv /tex
 
-WORKDIR /
+RUN adduser -D -s /bin/bash builder
+
+USER builder
+WORKDIR /home/builder
